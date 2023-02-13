@@ -3,11 +3,13 @@ import {
   Image,
   StyleSheet,
   TextInput,
-  Pressable,
   Text,
+  Touchable,
+  TouchableOpacity,
 } from "react-native";
 import React from "react";
 import logo from "../../assets/images/logo.png";
+import { SafeAreaView } from "react-navigation";
 
 const Login = () => {
   return (
@@ -20,9 +22,9 @@ const Login = () => {
           placeholder="Password"
           style={styles.inputLogin}
         />
-        <Pressable>
+        <TouchableOpacity>
           <Text style={styles.btnLog}>LogIn</Text>
-        </Pressable>
+        </TouchableOpacity>
       </View>
       <View style={styles.bS}></View>
     </View>
