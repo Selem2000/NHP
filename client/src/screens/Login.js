@@ -17,11 +17,7 @@ const Login = () => {
       <Image source={logo} style={styles.logo} resizeMode="stretch" />
       <View style={styles.blueBox}>
         <TextInput placeholder="Email" style={styles.inputLogin} />
-        <TextInput
-          secureTextEntry="true"
-          placeholder="Password"
-          style={styles.inputLogin}
-        />
+        <TextInput placeholder="Password" style={styles.inputLogin} />
         <TouchableOpacity>
           <Text style={styles.btnLog}>LogIn</Text>
         </TouchableOpacity>
@@ -40,17 +36,15 @@ const styles = StyleSheet.create({
     padding: 30,
     color: "#fff",
     borderBottomColor: "#fff",
-    borderBottomWidth: "2px",
+    borderBottomWidth: 2,
     borderStyle: "solid",
-    fontFamily: "Inter",
-    letterSpacing: "1px",
-    fontSize: "18px",
+    letterSpacing: 1,
+    fontSize: 20,
     outlineStyle: "none",
   },
   btnLog: {
-    fontFamily: "Inter",
-    letterSpacing: "1px",
-    fontSize: "18px",
+    letterSpacing: 1,
+    fontSize: 20,
     color: "#000",
     backgroundColor: "#fff",
     padding: 20,
@@ -71,7 +65,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 10,
   },
-  logo: { width: "400px", height: "370px" },
+  logo: { width: 400, height: 370 },
   bS: {
     width: 150,
     height: 10,

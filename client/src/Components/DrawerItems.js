@@ -22,6 +22,16 @@ const DrawerItems = ({ navigation }) => {
         iconName="bar-chart"
         onPress={() => navigation.navigate("Dashboard")}
       />
+      <DrawerItem
+        label="Staff"
+        iconName="people"
+        onPress={() => navigation.navigate("StaffDashboard")}
+      />
+      <DrawerItem
+        label="Time Management"
+        iconName="time"
+        onPress={() => navigation.navigate("AbsenceGlobal")}
+      />
     </View>
   );
 };
@@ -33,14 +43,13 @@ const styles = StyleSheet.create({
   },
   drawerItem: {
     flexDirection: "row",
-    alignItems: "end",
+    alignItems: "flex-end",
     padding: 10,
   },
   drawerItemText: {
     marginLeft: 10,
     marginTop: 20,
-    fontFamily: "Inter",
-    fontSize: "16px",
+    fontSize: 20,
     fontWeight: "500",
     color: "#324054",
     display: "flex",
