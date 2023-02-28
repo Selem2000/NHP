@@ -1,77 +1,131 @@
+import React, { useState, useEffect } from "react";
 import {
   View,
-  Image,
-  StyleSheet,
   TextInput,
-  Text,
-  Touchable,
   TouchableOpacity,
+  StyleSheet,
+  Alert,
+  Image,
+  Animated,
+  Text,
 } from "react-native";
-import React from "react";
-import logo from "../../assets/images/logo.png";
-import { SafeAreaView } from "react-navigation";
+import { useNavigation } from "@react-navigation/native";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [logoAnim] = useState(new Animated.Value(0));
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    Animated.timing(logoAnim, {
+      toValue: 1,
+      duration: 1000,
+      useNativeDriver: true,
+    }).start();
+  }, []);
+
+  const handleLogin = () => {
+    if (email === "user" && password === "user") {
+      navigation.navigate("User");
+    } else if (email === "admin" && password === "admin") {
+      navigation.navigate("Admin");
+    } else if (email === "manager" && password === "manager") {
+      navigation.navigate("Manager");
+    } else {
+      Alert.alert("Error", "Invalid email or password. Please try again.");
+    }
+  };
+
   return (
-    <View style={styles.root}>
-      <Image source={logo} style={styles.logo} resizeMode="stretch" />
-      <View style={styles.blueBox}>
-        <TextInput placeholder="Email" style={styles.inputLogin} />
-        <TextInput placeholder="Password" style={styles.inputLogin} />
-        <TouchableOpacity>
-          <Text style={styles.btnLog}>LogIn</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.bS}></View>
+    <View style={styles.container}>
+      <Animated.Image
+        source={require("../../assets/images/logo.png")}
+        style={[styles.logo, { opacity: logoAnim }]}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Email"
+        autoCapitalize="none"
+        onChangeText={(text) => setEmail(text)}
+        value={email}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Password"
+        secureTextEntry={true}
+        onChangeText={(text) => setPassword(text)}
+        value={password}
+      />
+      <TouchableOpacity style={styles.buttonContainer} onPress={handleLogin}>
+        <View style={styles.button}>
+          <Text style={styles.buttonText}>LOGIN</Text>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };
 
-export default Login;
-
 const styles = StyleSheet.create({
-  root: { alignItems: "center", padding: 20 },
-  inputLogin: {
-    width: "100%",
-    padding: 30,
-    color: "#fff",
-    borderBottomColor: "#fff",
-    borderBottomWidth: 2,
-    borderStyle: "solid",
-    letterSpacing: 1,
-    fontSize: 20,
-    outlineStyle: "none",
-  },
-  btnLog: {
-    letterSpacing: 1,
-    fontSize: 20,
-    color: "#000",
-    backgroundColor: "#fff",
-    padding: 20,
-    width: "300px",
-    textAlign: "center",
-    borderRadius: "15px",
-    marginTop: 10,
-  },
-  blueBox: {
-    width: 350,
-    height: 370,
-    backgroundColor: "#014EA2",
-    borderRadius: "15px",
-    padding: 20,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-evenly",
+  container: {
+    flex: 1,
+    justifyContent: "center",
     alignItems: "center",
-    marginTop: 10,
+    backgroundColor: "white",
   },
-  logo: { width: 400, height: 370 },
-  bS: {
-    width: 150,
-    height: 10,
-    backgroundColor: "#014EA2",
-    bottom: -59,
-    position: "absolute",
-    borderRadius: "100px",
+  logo: {
+    width: 300,
+    height: 300,
+    resizeMode: "contain",
+    marginBottom: 30,
+  },
+  input: {
+    width: "80%",
+    height: 40,
+    paddingHorizontal: 10,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: "#CCCCCC",
+    marginBottom: 15,
+    shadowColor: "#000000",
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    elevation: 2,
+  },
+  buttonContainer: {
+    width: "80%",
+    height: 40,
+    marginTop: 20,
+    marginBottom: 200,
+  },
+  button: {
+    flex: 1,
+    backgroundColor: "#003366",
+    borderRadius: 20,
+    justifyContent: "center",
+    alignItems: "center",
+
+    shadowColor: "#000000",
+    shadowOpacity: 0.2,
+    shadowRadius: 10,
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    elevation: 5,
+  },
+  buttonText: {
+    color: "#FFFFFF",
+    fontSize: 16,
+    fontWeight: "bold",
+    letterSpacing: 2,
+    textTransform: "uppercase",
   },
 });
+
+export default Login;

@@ -7,7 +7,7 @@ const absenceSchema = new Schema({
     ref: "user",
     required: true,
   },
-  startDate: Date,
+  startDate: { type: Date, default: Date.now },
   endDate: Date,
   reason: String,
 });
